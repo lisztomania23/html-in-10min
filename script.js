@@ -124,8 +124,8 @@ var typingTimeout;
 
 // Time delay of typing
 var specialLines = [2, 3, 4, 5, 6];
-var specialSpeed = 20;
-var normalSpeed = 10;
+var specialSpeed = 5;
+var normalSpeed = 50;
 
 function typewriter() {
     var destination = document.getElementById("typedtext");
