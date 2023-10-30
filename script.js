@@ -13,10 +13,10 @@ var aText = [
     "You've just put 'Hello, World!' on a webpage. 🙌",
     "Now markup and let the browser know what you're putting on the webpage.",
     "Aye, that's why we call it hyper text mark-up language!",
-    "Try putting your cat image using the <img> tag",
+    "Try putting your cat image using the <img> tag.",
     "Put the location of the image or URL in the src attribute.",
     "<img src='pictures/kitty-images/purr.jpg' alt='my green eye baby kito purr'>",
-    "Add a caption in paragraph <p>",
+    "Add a caption in paragraph <p>.",
     "<p>Meet my tiny paw, Purr! 🐾😺</p>",
     "It also has a closing tag, unlike the <img> tag.",
     "Some more elements that have both opening and closing tags headings: <h1></h1>, <h2></h2>, <h3></h3>, lists: <ul></ul>, <ol></ol>, <li></li>, links: <a></a>, etc.",
@@ -115,19 +115,21 @@ var aText = [
     "Now, go and stack some coffee cups! ☕☕☕"
 ];
 
-// Time delay of typing
-var specialLines = [2, 3, 4, 5, 6];
-var specialSpeed = 20;
-var normalSpeed = 100;
-
 
 var iIndex = 0;
 var iTextPos = 0;
 var sContents = '';
 var scrollCount = 0;
+var typingTimeout;
+
+// Time delay of typing
+var specialLines = [2, 3, 4, 5, 6];
+var specialSpeed = 20;
+var normalSpeed = 10;
 
 function typewriter() {
     var destination = document.getElementById("typedtext");
+    var iSpeed = normalSpeed;
 
     if (iIndex < aText.length) {
         sContents = '';
@@ -136,7 +138,6 @@ function typewriter() {
             if (i === iIndex) {
                 sContents += textToDisplay + "_";
             } else {
-
                 sContents += textToDisplay.replace(/&/g, '&amp;')
                     .replace(/</g, '&lt;')
                     .replace(/>/g, '&gt;')
@@ -145,7 +146,6 @@ function typewriter() {
             }
             sContents += '<br>';
         }
-
 
         destination.innerHTML = sContents;
 
@@ -156,8 +156,6 @@ function typewriter() {
 
         if (specialLines.includes(iIndex)) {
             iSpeed = specialSpeed;
-        } else {
-            iSpeed = normalSpeed;
         }
 
         if (iTextPos < aText[iIndex].length) {
@@ -167,10 +165,27 @@ function typewriter() {
             iIndex++;
         }
 
-
-        setTimeout(typewriter, iSpeed);
+        typingTimeout = setTimeout(typewriter, iSpeed);
     }
 }
 
 typewriter();
 
+// Skip typing and display all text immediately
+function skipTyping() {
+    clearTimeout(typingTimeout);
+    var destination = document.getElementById("typedtext");
+    var allText = aText.map(function (text) {
+        return text.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }).join('<br>');
+    destination.innerHTML = allText;
+}
+
+// Event listener for the skip button
+document.getElementById('skipButton').addEventListener('click', function () {
+    skipTyping();
+});
