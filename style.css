@@ -137,11 +137,31 @@ body::before {
     font-size: 20px;
 }
 
-html,
-body a {
-    cursor: url("img/icons8-select-cursor-24.png"), auto
+button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-family: "VT323", monospace;
+    font-size: 1rem;
+    padding: 5px;
+    margin-bottom: 50px;
+    margin-right: 50px;
+    color: rgb(var(--main));
+    background-color: rgb(var(--black));
+    z-index: 10;
 }
 
+button:focus {
+    cursor: url("img/icons8-select-cursor-24.png"), auto;
+}
+
+html,
+body a,
+button {
+    cursor: url("img/icons8-select-cursor-24.png"), auto;
+}
+
+button,
 a:hover {
-    cursor: url("img/icons8-hand-cursor-32.png"), auto
+    cursor: url("img/icons8-hand-cursor-32.png"), auto;
 }
