@@ -19,7 +19,7 @@ html {
     line-height: 1.5em;
     position: relative;
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 body {
